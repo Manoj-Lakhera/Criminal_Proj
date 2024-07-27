@@ -30,7 +30,7 @@ class Main:
         self.btn2.grid(row=0, column=3, pady=10, padx=10)
         self.btn3 = Button(self.searchFrame, text='Delete', font=('Arial', 14), command=self.deleteCriminal)
         self.btn3.grid(row=0, column=4, pady=10, padx=10)
-        self.btn4 = Button(self.searchFrame, text='Capture', font=('Arial', 14), command=captureImage.CaptureImage)
+        self.btn4 = Button(self.searchFrame, text='Capture', font=('Arial', 14), command=self.captureCriminal)
         self.btn4.grid(row=0, column=5, pady=10, padx=10)
 
         self.criminalTable = ttk.Treeview(self.root, columns=['id','name', 'gender', 'dob','mobile','address','family_member','member_contact','image','category'])
@@ -70,6 +70,13 @@ class Main:
     def resetCriminal(self):
         self.txt1.delete(0, 'end')
         self.getValues()
+    def captureCriminal(self):
+        row = self.criminalTable.selection()
+        row_id = row[0]
+        items = self.criminalTable.item(row_id)
+        data = items["values"]
+        id = data[0]
+        captureImage.CaptureImage(id=id)
 
     def searchCriminal(self):
         text = self.txt1.get()

@@ -3,7 +3,8 @@ import cv2
 import os
 
 class CaptureImage:
-    def __init__(self):
+    def __init__(self,id):
+        self.id=id
         self.root = Tk()
         self.root.geometry('500x500')
         self.root.title('Face Recognition')
@@ -13,6 +14,8 @@ class CaptureImage:
         self.lb.pack(pady=20)
         self.txt = Entry(self.root, font=('Arial', 15))
         self.txt.pack(pady=20)
+        self.txt.insert(0,self.id)
+        self.txt.configure(state="readonly")
         self.btn = Button(self.root, text='Capture', font=('Arial', 15),command=self.capture)
         self.btn.pack(pady=20)
 
